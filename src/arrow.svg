@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 15" width="112" height="15">
+	<style>
+		tspan { white-space:pre }
+		.shp0 { fill: #d2d5d6 } 
+	</style>
+	<g id="Folder 156 copy">
+		<path id="Shape copy" class="shp0" d="M101.9,14h1.3l3.25,-5.47h3.57c0.54,0 0.98,-0.46 0.98,-1.03c0,-0.57 -0.44,-1.03 -0.98,-1.03l-3.57,0l-3.25,-5.47h-1.3l1.63,5.47h-3.57l-0.98,-1.37h-0.98l0.65,2.39l-0.65,2.39h0.98l0.98,-1.37h3.57z" />
+		<path id="Rectangle 2 copy" class="shp0" d="M1,8h96v-1h-96z" />
+	</g>
+</svg>
