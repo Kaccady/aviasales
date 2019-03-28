@@ -6,9 +6,54 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f3f7fa;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+div {
+  display: flex;
+}
+.App {
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.logo {
+  background-image: url(Logo.svg);
+  height: 150px;
+  width: 150px;
+  background-size: cover;
+  margin: 50px;
+}
+.content {
+  flex-wrap: wrap;
+}
+.filters {
+  flex-direction: column;
+  background-color: white;
+  padding: 20px;
+}
+.tickets {
+  flex-direction: column;
+}
+.t-logo {
+  background-size: cover;
+  background-image: url(tklogo.png);
+  width: 99px;
+  height: 36px;
+}
+.column {
+  flex-direction: column;
+}
+.buy-button {
+  width: 99px;
+  height: 36px;
+}
+.ticket {
+  background-color: white;
+  padding: 20px;
+  margin-left:20px;
 }
