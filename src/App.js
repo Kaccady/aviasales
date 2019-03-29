@@ -2,69 +2,64 @@ import React, { Component } from "react";
 import arrow from "./arrow.svg";
 import ticketsData from "./tickets.json";
 
-const Checkbox = props => {
+/*const Checkbox = props => {
   return (
     <div className="checkbox">
-      <input type="checkbox" />
+      <input type="checkbox"/>
       {props.name}
     </div>
   );
 };
 
-const stops = ["Без пересадок", "1 Пересадка", "2 Пересадки", "3 Пересадки"];
+
 const checkboxes = stops.map(function(props) {
   return <Checkbox name={props} />;
-});
+});*/
+const stops = ["", "1 Пересадка", "2 Пересадки", "3 Пересадки"];
 
-const SortByNumber = (a, b) => {
-  return a.price - b.price;
-};
+const SortByNumber = (a, b) => a.price - b.price;
 
-const Ticket = i => {
-  return (
-    <div className="ticket">
-      <div className="column">
-        <span className="t-logo" />
-        <button className="buy-button">
-          Купить
-          <br /> за {i.i.price}₽
-        </button>
-      </div>
-      <div className="column">
-        <div>
-          <p>{i.i.departure_time}</p>
-          <div className="column">
-            <p>{stops[i.i.stops]}</p>
-            <img alt="arrow" src={arrow} />
-          </div>
-          <p>{i.i.arrival_time}</p>
+const Ticket = props => (
+  <div className="ticket">
+    <div className="column">
+      <span className="t-logo" />
+      <button className="buy-button">
+        Купить
+        <br /> за {props.i.price}₽
+      </button>
+    </div>
+    <div className="column">
+      <div>
+        <p>{props.i.departure_time}</p>
+        <div className="column">
+          <p>{stops[props.i.stops]}</p>
+          <img alt="arrow" src={arrow} />
         </div>
-        <div>
-          <div className="column">
-            <p>
-              {i.i.origin}, {i.i.origin_name}
-            </p>
-            <p>{i.i.departure_date}</p>
-          </div>
-          <div className="column">
-            <p>
-              {" "}
-              {i.i.destination_name}, {i.i.destination}
-            </p>
-            <p>{i.i.arrival_date}</p>
-          </div>
+        <p>{props.i.arrival_time}</p>
+      </div>
+      <div>
+        <div className="column">
+          <p>
+            {props.i.origin}, {props.i.origin_name}
+          </p>
+          <p>{props.i.departure_date}</p>
+        </div>
+        <div className="column">
+          <p>
+            {" "}
+            {props.i.destination_name}, {props.i.destination}
+          </p>
+          <p>{props.i.arrival_date}</p>
         </div>
       </div>
     </div>
-  );
-};
-
-const Tikets = f => {
+  </div>
+);
+const Tikets = props => {
   const a = ticketsData.tickets.filter(function(b) {
-    return b.stops === f;
-    
-  }
-  );console.log(f);
+    return b.stops === props.f;
+  });
+
   const c = a.sort(SortByNumber).map(function(props) {
     return <Ticket i={props} />;
   });
@@ -76,6 +71,9 @@ class App extends Component {
     super(props);
     this.state = { filter: 3 };
   }
+  Check = (e) => {
+    this.setState({filter: Number(e.target.id)})
+  };
   render() {
     return (
       <div className="App">
@@ -89,8 +87,12 @@ class App extends Component {
               <button>EUR</button>
             </div>
             <p>КОЛИЧЕСТВО ПЕРЕСАДОК</p>
-            <Checkbox onChange="" name="Все" />
-            {checkboxes}
+            <div><input type="checkbox" onChange={this.Check} />Все</div>
+            <div><input id='0' type="checkbox" onChange={this.Check} />Без пересадок</div>
+            <div><input id='1' type="checkbox" onChange={this.Check} />1 пересадка</div>
+            <div><input id='2' type="checkbox" onChange={this.Check} />2 пересадки</div>
+            <div><input id='3' type="checkbox" onChange={this.Check} />3 пересадки</div>
+         
           </div>
           <Tikets f={this.state.filter} />
         </div>
