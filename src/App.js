@@ -57,8 +57,10 @@ const Ticket = props => (
 );
 const Tikets = props => {
   const a = ticketsData.tickets.filter(function(b) {
-    return b.stops === props.f;
-  });
+    
+    return b.stops === props.f.map;
+
+  });    console.log(props)
 
   const c = a.sort(SortByNumber).map(function(props) {
     return <Ticket i={props} />;
@@ -69,10 +71,18 @@ const Tikets = props => {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { filter: 3 };
+    this.state = { filter: [0, 1, 2, 3] };
   }
-  Check = (e) => {
-    this.setState({filter: Number(e.target.id)})
+  Check = e => {
+    if (e.target.checked) {
+      const a = this.state.filter;
+      a.splice(e.target.id,1,Number(e.target.id));
+      this.setState({ filter: a});
+    } else {
+      const a = this.state.filter;
+      a.splice(e.target.id,1,-1);
+      this.setState({ filter: a});
+    }
   };
   render() {
     return (
@@ -87,12 +97,23 @@ class App extends Component {
               <button>EUR</button>
             </div>
             <p>КОЛИЧЕСТВО ПЕРЕСАДОК</p>
-            <div><input type="checkbox" onChange={this.Check} />Все</div>
-            <div><input id='0' type="checkbox" onChange={this.Check} />Без пересадок</div>
-            <div><input id='1' type="checkbox" onChange={this.Check} />1 пересадка</div>
-            <div><input id='2' type="checkbox" onChange={this.Check} />2 пересадки</div>
-            <div><input id='3' type="checkbox" onChange={this.Check} />3 пересадки</div>
-         
+            <div>
+              <input type="checkbox" onChange={this.Check} />
+              Все
+            </div>
+            <div>
+              <input id="0" type="checkbox" onChange={this.Check} />
+              Без пересадок
+            </div>
+            <div>
+              <input id="1" type="checkbox" onChange={this.Check} />1 пересадка
+            </div>
+            <div>
+              <input id="2" type="checkbox" onChange={this.Check} />2 пересадки
+            </div>
+            <div>
+              <input id="3" type="checkbox" onChange={this.Check} />3 пересадки
+            </div>
           </div>
           <Tikets f={this.state.filter} />
         </div>
