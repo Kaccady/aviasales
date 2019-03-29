@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import arrow from "./arrow.svg";
+import ticketsData from "./tickets.json";
 
 const Checkbox = props => {
   return (
@@ -14,57 +15,67 @@ const stops = ["Без пересадок", "1 Пересадка", "2 Пере�
 const checkboxes = stops.map(function(props) {
   return <Checkbox name={props} />;
 });
-const i = {
-  origin: "VVO",
-  origin_name: "Владивосток",
-  destination: "TLV",
-  destination_name: "Тель-Авив",
-  departure_date: "12.05.18",
-  departure_time: "16:20",
-  arrival_date: "12.05.18",
-  arrival_time: "22:10",
-  carrier: "TK",
-  stops: 3,
-  price: 12400
+
+const SortByNumber = (a, b) => {
+  return a.price - b.price;
 };
 
-class Ticket extends Component {
-  render() {
-    return (
-      <div className="ticket">
-        <div className="column">
-          <span className="t-logo" />
-          <button className="buy-button">
-            Купить
-            <br /> за {i.price}₽
-          </button>
-        </div>
-        <div className="column">
-          <div>
-            <p>{i.departure_time}</p>
-            <div className="column">
-              <p>{stops[i.stops]}</p>
-              <img alt="arrow" src={arrow} />
-            </div>
-            <p>{i.arrival_time}</p>
+const Ticket = i => {
+  return (
+    <div className="ticket">
+      <div className="column">
+        <span className="t-logo" />
+        <button className="buy-button">
+          Купить
+          <br /> за {i.i.price}₽
+        </button>
+      </div>
+      <div className="column">
+        <div>
+          <p>{i.i.departure_time}</p>
+          <div className="column">
+            <p>{stops[i.i.stops]}</p>
+            <img alt="arrow" src={arrow} />
           </div>
-          <div>
-            <div className="column">
-              <p>{i.origin}, {i.origin_name}</p>
-              <p>{i.departure_date}</p>
-            </div>
-            <div className="column">
-              <p> {i.destination_name}, {i.destination}</p>
-              <p>{i.arrival_date}</p>
-            </div>
+          <p>{i.i.arrival_time}</p>
+        </div>
+        <div>
+          <div className="column">
+            <p>
+              {i.i.origin}, {i.i.origin_name}
+            </p>
+            <p>{i.i.departure_date}</p>
+          </div>
+          <div className="column">
+            <p>
+              {" "}
+              {i.i.destination_name}, {i.i.destination}
+            </p>
+            <p>{i.i.arrival_date}</p>
           </div>
         </div>
       </div>
-    );
+    </div>
+  );
+};
+
+const Tikets = f => {
+  const a = ticketsData.tickets.filter(function(b) {
+    return b.stops === f;
+    
   }
-}
+  );console.log(f);
+  const c = a.sort(SortByNumber).map(function(props) {
+    return <Ticket i={props} />;
+  });
+  return <div className="tickets">{c}</div>;
+};
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { filter: 3 };
+  }
   render() {
     return (
       <div className="App">
@@ -78,12 +89,10 @@ class App extends Component {
               <button>EUR</button>
             </div>
             <p>КОЛИЧЕСТВО ПЕРЕСАДОК</p>
-            <Checkbox name="Все" />
+            <Checkbox onChange="" name="Все" />
             {checkboxes}
           </div>
-          <div className="tickets">
-            <Ticket />
-          </div>
+          <Tikets f={this.state.filter} />
         </div>
       </div>
     );
