@@ -2,59 +2,47 @@ import React, { Component } from "react";
 import arrow from "./arrow.svg";
 import ticketsData from "./tickets.json";
 
-/*const Checkbox = props => {
-  return (
-    <div className="checkbox">
-      <input type="checkbox"/>
-      {props.name}
-    </div>
-  );
-};
-
-
-const checkboxes = stops.map(function(props) {
-  return <Checkbox name={props} />;
-});*/
-const stops = ["", "1 Пересадка", "2 Пересадки", "3 Пересадки"];
+const stops = ["", "1 ПЕРЕСАДКА", "2 ПЕРЕСАДКИ", "3 ПЕРЕСАДКИ"];
 
 const SortByNumber = (a, b) => a.price - b.price;
 
 const Ticket = props => (
   <div className="ticket">
-    <div className="column">
+    <div className="ticket-side">
       <span className="t-logo" />
-      <button className="buy-button">
+      <button className="button-buy">
         Купить
-        <br /> за {Math.round(props.i.price*props.y.currency)}{props.y.value}
+        <br /> за {Math.round(props.i.price * props.y.currency)}
+        {props.y.value}
       </button>
     </div>
-    <div className="column">
-      <div>
-        <p>{props.i.departure_time}/ . . .</p>
+    <div className="ticket-main">
+      <div className='ticket-up'>
+        <p className='time'>{props.i.departure_time}</p>
         <div className="column">
-          <p>{stops[props.i.stops]}</p>
+          <p className='transfer'>{stops[props.i.stops]}</p>
           <img alt="arrow" src={arrow} />
         </div>
-        <p>{props.i.arrival_time}</p>
+        <p className='time'>{props.i.arrival_time}</p>
       </div>
-      <div>
+      <div className='ticket-down'>
         <div className="column">
-          <p>
+          <p className='city'>
             {props.i.origin}, {props.i.origin_name}
           </p>
-          <p>{props.i.departure_date}</p>
+          <p className='date'>{props.i.departure_date}</p>
         </div>
         <div className="column">
-          <p>
-            {" "}
+          <p className='city'>
             {props.i.destination_name}, {props.i.destination}
           </p>
-          <p>{props.i.arrival_date}</p>
+          <p className='date'>{props.i.arrival_date}</p>
         </div>
       </div>
     </div>
   </div>
 );
+
 const Tikets = props => {
   const filterByStops = ticketsData.tickets.filter(function(ticket) {
     return props.filter.indexOf(ticket.stops) !== -1;
@@ -69,8 +57,14 @@ const Tikets = props => {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { filter: [0, 1, 2, -1], isCheckedAll: false,currency: 1,value:'₽' };
+    this.state = {
+      filter: [0, 1, 2, -1],
+      isCheckedAll: false,
+      currency: 1,
+      value: "₽"
+    };
   }
+
   Check = e => {
     if (e.target.checked) {
       const a = this.state.filter;
@@ -96,14 +90,19 @@ class App extends Component {
     }
   };
 
-  Currency = e =>{
+  Currency = e => {
+    // eslint-disable-next-line
     switch (e.target.innerText) {
-      case "RUB": this.setState({currency: 1, value:'₽'});
-      break;
-      case "USD":this.setState({currency: 0.015,value:'$'});
-      break;
-      case"EUR":this.setState({currency: 0.014,value:'€'})}
-    };
+      case "RUB":
+        this.setState({ currency: 1, value: "₽" });
+        break;
+      case "USD":
+        this.setState({ currency: 0.015, value: "$" });
+        break;
+      case "EUR":
+        this.setState({ currency: 0.014, value: "€" });
+    }
+  };
 
   render() {
     return (
@@ -167,7 +166,11 @@ class App extends Component {
               3 пересадки
             </div>
           </div>
-          <Tikets value={this.state.value} currency={this.state.currency} filter={this.state.filter} />
+          <Tikets
+            value={this.state.value}
+            currency={this.state.currency}
+            filter={this.state.filter}
+          />
         </div>
       </div>
     );
