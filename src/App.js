@@ -25,12 +25,12 @@ const Ticket = props => (
       <span className="t-logo" />
       <button className="buy-button">
         Купить
-        <br /> за {props.i.price}₽
+        <br /> за {Math.round(props.i.price*props.y.currency)}{props.y.value}
       </button>
     </div>
     <div className="column">
       <div>
-        <p>{props.i.departure_time}</p>
+        <p>{props.i.departure_time}/ . . .</p>
         <div className="column">
           <p>{stops[props.i.stops]}</p>
           <img alt="arrow" src={arrow} />
@@ -56,34 +56,55 @@ const Ticket = props => (
   </div>
 );
 const Tikets = props => {
-  const a = ticketsData.tickets.filter(function(b) {
-    
-    return b.stops === props.f.map;
-
-  });    console.log(props)
-
-  const c = a.sort(SortByNumber).map(function(props) {
-    return <Ticket i={props} />;
+  const filterByStops = ticketsData.tickets.filter(function(ticket) {
+    return props.filter.indexOf(ticket.stops) !== -1;
   });
-  return <div className="tickets">{c}</div>;
+
+  const filterByPrice = filterByStops.sort(SortByNumber).map(function(y) {
+    return <Ticket y={props} i={y} />;
+  });
+  return <div className="tickets">{filterByPrice}</div>;
 };
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { filter: [0, 1, 2, 3] };
+    this.state = { filter: [0, 1, 2, -1], isCheckedAll: false,currency: 1,value:'₽' };
   }
   Check = e => {
     if (e.target.checked) {
       const a = this.state.filter;
-      a.splice(e.target.id,1,Number(e.target.id));
-      this.setState({ filter: a});
+      a.splice(e.target.id, 1, Number(e.target.id));
+      this.setState({ filter: a });
     } else {
       const a = this.state.filter;
-      a.splice(e.target.id,1,-1);
-      this.setState({ filter: a});
+      a.splice(e.target.id, 1, -1);
+      this.setState({ filter: a });
+    }
+    if (this.state.filter.indexOf(-1) === -1) {
+      this.setState({ isCheckedAll: true });
+    } else {
+      this.setState({ isCheckedAll: false });
     }
   };
+
+  CheckAll = e => {
+    if (e.target.checked) {
+      this.setState({ filter: [0, 1, 2, 3], isCheckedAll: true });
+    } else {
+      this.setState({ filter: [-1, -1, -1, -1], isCheckedAll: false });
+    }
+  };
+
+  Currency = e =>{
+    switch (e.target.innerText) {
+      case "RUB": this.setState({currency: 1, value:'₽'});
+      break;
+      case "USD":this.setState({currency: 0.015,value:'$'});
+      break;
+      case"EUR":this.setState({currency: 0.014,value:'€'})}
+    };
+
   render() {
     return (
       <div className="App">
@@ -92,30 +113,61 @@ class App extends Component {
           <div className="filters">
             <p>ВАЛЮТА</p>
             <div className="buttons">
-              <button>RUB</button>
-              <button>USD</button>
-              <button>EUR</button>
+              <button onClick={this.Currency}>RUB</button>
+              <button onClick={this.Currency}>USD</button>
+              <button onClick={this.Currency}>EUR</button>
             </div>
             <p>КОЛИЧЕСТВО ПЕРЕСАДОК</p>
             <div>
-              <input type="checkbox" onChange={this.Check} />
+              <input
+                checked={this.state.isCheckedAll}
+                id="all"
+                type="checkbox"
+                onChange={this.CheckAll}
+              />
               Все
             </div>
             <div>
-              <input id="0" type="checkbox" onChange={this.Check} />
+              <input
+                id="0"
+                checked={this.state.filter[0] !== -1}
+                defaultChecked="true"
+                type="checkbox"
+                onChange={this.Check}
+              />
               Без пересадок
             </div>
             <div>
-              <input id="1" type="checkbox" onChange={this.Check} />1 пересадка
+              <input
+                id="1"
+                checked={this.state.filter[1] !== -1}
+                defaultChecked="true"
+                type="checkbox"
+                onChange={this.Check}
+              />
+              1 пересадка
             </div>
             <div>
-              <input id="2" type="checkbox" onChange={this.Check} />2 пересадки
+              <input
+                id="2"
+                checked={this.state.filter[2] !== -1}
+                defaultChecked="true"
+                type="checkbox"
+                onChange={this.Check}
+              />
+              2 пересадки
             </div>
             <div>
-              <input id="3" type="checkbox" onChange={this.Check} />3 пересадки
+              <input
+                id="3"
+                checked={this.state.filter[3] !== -1}
+                type="checkbox"
+                onChange={this.Check}
+              />
+              3 пересадки
             </div>
           </div>
-          <Tikets f={this.state.filter} />
+          <Tikets value={this.state.value} currency={this.state.currency} filter={this.state.filter} />
         </div>
       </div>
     );
