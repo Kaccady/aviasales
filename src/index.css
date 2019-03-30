@@ -34,8 +34,12 @@ div {
 .filters {
   flex-direction: column;
   background-color: white;
-  padding: 20px;
+  padding: 0px;
   margin-bottom: 40px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(236, 233, 233);
 }
 .tickets {
   flex-direction: column;
@@ -48,6 +52,7 @@ div {
   background-image: url(tklogo.png);
   width: 120px;
   height: 35px;
+  margin: 10px;
 }
 .column {
   flex-direction: column;
@@ -57,23 +62,31 @@ div {
   margin-bottom: 20px;
   width: 577px;
   height: 172px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(236, 233, 233);
 }
 .time {
   font-size: 32px;
+  width: 81.713px;
 }
 .date {
   font-size: 12px;
   color: #8b9497;
+  margin-top:5px;
 }
 .transfer {
   font-size: 10px;
   color: #8b9497;
   font-weight: 500;
   text-align: center;
+  margin: 0px;
 }
 .city {
   font-size: 12px;
   font-weight: 600;
+  margin-bottom: 0px;
 }
 .button-buy {
   font-size: 16px;
@@ -85,22 +98,24 @@ div {
   padding: 0;
   border-radius: 5px;
   cursor: pointer;
+  margin: 10px;
+  outline: none;
 }
 .button-buy:hover {
   background-color: #ff8123;
+  
 }
 .ticket-side {
   flex-direction: column;
   width: 200px;
   height: 100%;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   border-right-style: ridge;
-  border-color:#eceff1;
+  border-color: #eceff1;
   padding-right: 30px;
   border-right-width: 1px;
-
-  
+  padding-left: 30px;
 }
 .ticket-up {
   flex-direction: row;
@@ -115,5 +130,25 @@ div {
   flex-direction: column;
   width: 100%;
   margin-left: 30px;
-  margin-right:30px;
+  margin-right: 30px;
+}
+.buttons {
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(236, 233, 233);
+  justify-content: stretch;
+}
+.currency-button {
+  border: none;
+  background-color: white;
+  outline: none;
+}
+.plane-div {
+  flex-direction: column;
+  align-items: center;
+  justify-content:flex-end;
+}
+.city-div-right{flex-direction: column;
+  align-items: flex-end;
 }

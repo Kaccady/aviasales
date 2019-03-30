@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import arrow from "./arrow.svg";
 import ticketsData from "./tickets.json";
 
-const stops = ["", "1 ПЕРЕСАДКА", "2 ПЕРЕСАДКИ", "3 ПЕРЕСАДКИ"];
+const stops = ["⠀", "1 ПЕРЕСАДКА", "2 ПЕРЕСАДКИ", "3 ПЕРЕСАДКИ"];
 
 const SortByNumber = (a, b) => a.price - b.price;
 
@@ -17,26 +17,26 @@ const Ticket = props => (
       </button>
     </div>
     <div className="ticket-main">
-      <div className='ticket-up'>
-        <p className='time'>{props.i.departure_time}</p>
-        <div className="column">
-          <p className='transfer'>{stops[props.i.stops]}</p>
+      <div className="ticket-up">
+        <p className="time">{props.i.departure_time}</p>
+        <div className="plane-div">
+          <p className="transfer">{stops[props.i.stops]}</p>
           <img alt="arrow" src={arrow} />
         </div>
-        <p className='time'>{props.i.arrival_time}</p>
+        <p className="time">{props.i.arrival_time}</p>
       </div>
-      <div className='ticket-down'>
+      <div className="ticket-down">
         <div className="column">
-          <p className='city'>
+          <p className="city">
             {props.i.origin}, {props.i.origin_name}
           </p>
-          <p className='date'>{props.i.departure_date}</p>
+          <p className="date">{props.i.departure_date}</p>
         </div>
-        <div className="column">
-          <p className='city'>
+        <div className="city-div-right">
+          <p className="city">
             {props.i.destination_name}, {props.i.destination}
           </p>
-          <p className='date'>{props.i.arrival_date}</p>
+          <p className="date">{props.i.arrival_date}</p>
         </div>
       </div>
     </div>
@@ -112,9 +112,15 @@ class App extends Component {
           <div className="filters">
             <p>ВАЛЮТА</p>
             <div className="buttons">
-              <button onClick={this.Currency}>RUB</button>
-              <button onClick={this.Currency}>USD</button>
-              <button onClick={this.Currency}>EUR</button>
+              <button className="currency-button" onClick={this.Currency}>
+                RUB
+              </button>
+              <button className="currency-button" onClick={this.Currency}>
+                USD
+              </button>
+              <button className="currency-button" onClick={this.Currency}>
+                EUR
+              </button>
             </div>
             <p>КОЛИЧЕСТВО ПЕРЕСАДОК</p>
             <div>
