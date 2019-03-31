@@ -2,7 +2,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Open Sans";
+  font-family: Open Sans, Tahoma, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f3f7fa;
@@ -40,6 +40,9 @@ div {
   border-style: solid;
   border-width: 1px;
   border-color: rgb(236, 233, 233);
+  width: 230px;
+  margin: 0 20px 20px 20px;
+  padding-bottom: 20px;
 }
 .tickets {
   flex-direction: column;
@@ -57,16 +60,7 @@ div {
 .column {
   flex-direction: column;
 }
-.ticket {
-  background-color: white;
-  margin-bottom: 20px;
-  width: 577px;
-  height: 172px;
-  border-radius: 5px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgb(236, 233, 233);
-}
+
 .time {
   font-size: 32px;
   width: 81.713px;
@@ -74,7 +68,7 @@ div {
 .date {
   font-size: 12px;
   color: #8b9497;
-  margin-top:5px;
+  margin-top: 5px;
 }
 .transfer {
   font-size: 10px;
@@ -103,7 +97,15 @@ div {
 }
 .button-buy:hover {
   background-color: #ff8123;
-  
+}
+.ticket {
+  background-color: white;
+  margin-bottom: 20px;
+  height: 172px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(236, 233, 233);
 }
 .ticket-side {
   flex-direction: column;
@@ -133,22 +135,161 @@ div {
   margin-right: 30px;
 }
 .buttons {
-  border-radius: 5px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgb(236, 233, 233);
   justify-content: stretch;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 .currency-button {
   border: none;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-color: rgb(236, 233, 233);
+  border-width: 1px;
   background-color: white;
   outline: none;
+  padding: 15px;
+  color: #2196f3;
+  font-size: 12px;
+  width: 100%;
+}
+.usd-button {
+  border-right-style: solid;
+  border-left-style: solid;
+}
+.rub-button {
+  border-left-style: solid;
+  border-radius: 5px 0px 0px 5px;
+}
+.eur-button {
+  border-right-style: solid;
+  border-radius: 0px 5px 5px 0px;
+}
+.currency-button:hover {
+  background-color: #f1fcff;
+  border-color: #2196f3;
+  border-style: solid;
 }
 .plane-div {
   flex-direction: column;
   align-items: center;
-  justify-content:flex-end;
+  justify-content: flex-end;
 }
-.city-div-right{flex-direction: column;
+.city-div-right {
+  flex-direction: column;
   align-items: flex-end;
+}
+
+.checkbox-div:hover {
+  background-color: #f1fcff;
+}
+.checkbox-div:hover .transfer-filter-hidden {
+  visibility: visible;
+  animation: fadeInUp;
+}
+.checkbox-div {
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  cursor: pointer;
+}
+.transfer-filter {
+  font-size: 13px;
+  padding-left: 10px;
+}
+.transfer-filter-hidden {
+  visibility: hidden;
+  font-size: 11px;
+  color: #2196f3;
+}
+.checkbox-in-div {
+  align-items: center;
+  width: 100%;
+}
+.checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(197, 195, 195);
+}
+.wrapper {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.transfer-filter-hidden:hover {
+  color: rgb(255, 160, 35);
+}
+.checked {
+  background-image: url(checkmark.svg);
+  background-repeat: no-repeat;
+  background-size: 50% 50%;
+  background-position: center;
+  border-color: #2196f3;
+}
+
+.not-found {
+  height: 250px;
+  max-width: 636px;
+  min-width: 300px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  margin-bottom: 20px;
+  height: 172px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(236, 233, 233);
+}
+@media (max-width: 816px) {
+  .content {
+    align-items: center;
+  }
+}
+@media (max-width: 700px) {
+  .ticket {
+    height: 100%;
+    flex-direction: column-reverse;
+    width: 320px;
+  }
+  .ticket-main {
+    margin: 0;
+  }
+  .content {
+    flex-direction: column;
+  }
+  .ticket-side {
+    border-right-style: none;
+    border-top-style: ridge;
+    border-color: #eceff1;
+    border-top-width: 1px;
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 15px;
+  }
+}
+@media (min-width: 833px) {
+  .not-found {
+    width: 637px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+.numberOfTransfers {
+  font-size: 12px;
+  font-weight: 600;
+  padding-left: 15px;
+}
+.active {
+  background-color: #2196f3;
+  color: white;
+  border-color: #2196f3 !important;
+}
+.active:hover {
+  background-color: #2196f3;
+  border-color: #2196f3 !important;
 }
